@@ -128,11 +128,12 @@ document.querySelectorAll('[data-thumbnail-gallery]').forEach(gallery=>{
 // Show only artist-supplied Chinese, preserving an uninterrupted English default.
 document.querySelectorAll('[data-translation-toggle]').forEach(button=>{button.addEventListener('click',()=>{const block=button.closest('[data-translation-block]');const original=document.getElementById(button.getAttribute('aria-controls'));const expanded=button.getAttribute('aria-expanded')!=='true';const translated=button.dataset.translationKind==='translation';button.setAttribute('aria-expanded',String(expanded));original.hidden=!expanded;block.classList.toggle('translation-open',expanded);button.innerHTML=(expanded?'Hide Chinese':'Show Chinese')+(translated?'':' original')+' <span lang="zh-CN">'+(translated?'中文':'中文原文')+'</span>';});});
 
-// One continuous grid: sound technology first, pure acoustic second, then chosen sort.
+// Completed works: sound technology then pure acoustic; a final mixed ongoing section stays chronological.
 (()=>{
  const filters=[...document.querySelectorAll('[data-work-filter]')],grid=document.getElementById('work-grid'),sort=document.querySelector('[data-work-sort]');
  if(!filters.length||!grid||!sort)return;
- const works=[...grid.children],status=document.querySelector('.filter-status');
+ const progress=document.querySelector('[data-work-progress]'),progressGrid=document.getElementById('work-progress-grid');
+ const works=[...document.querySelectorAll('#work .project')],status=document.querySelector('.filter-status');
  const titleOrder=new Intl.Collator('en',{sensitivity:'base',numeric:true});
  const compareTitle=(a,b)=>titleOrder.compare(a.dataset.title,b.dataset.title);
  const compareGroup=(a,b)=>Number(a.dataset.soundGroup==='acoustic')-Number(b.dataset.soundGroup==='acoustic');
@@ -140,8 +141,13 @@ document.querySelectorAll('[data-translation-toggle]').forEach(button=>{button.a
   const ordered=[...grid.children].sort((a,b)=>compareGroup(a,b)||(sort.value==='title'?compareTitle(a,b):(b.dataset.created||'').localeCompare(a.dataset.created||'')||compareTitle(a,b)));
   grid.append(...ordered);
  };
+ if(progressGrid)progressGrid.append(...[...progressGrid.children].sort((a,b)=>(b.dataset.created||'').localeCompare(a.dataset.created||'')||compareTitle(a,b)));
  sort.value='created';applySort();sort.addEventListener('change',applySort);
- const updateCount=()=>{status.textContent=works.filter(work=>!work.hidden).length+' works'};
+ const updateCount=()=>{
+  status.textContent=works.filter(work=>!work.hidden).length+' works';
+  if(progress)progress.hidden=![...progress.querySelectorAll('.project')].some(work=>!work.hidden);
+  grid.hidden=![...grid.children].some(work=>!work.hidden);
+ };
  filters.forEach(button=>button.addEventListener('click',()=>{
   const group=button.dataset.workFilter;
   filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));

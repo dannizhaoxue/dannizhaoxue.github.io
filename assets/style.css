@@ -517,6 +517,10 @@ body[data-project="binary"]{--lime:#e5e5e5;--accent:#e5e5e5;--work-title-face:'A
 .work-sort select:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
 @media(max-width:650px){.work-controls{display:block}.work-controls .work-filters{margin-bottom:14px}.work-sort{margin:0 0 20px;gap:8px}}
 
+/* Restore the final mixed ongoing section, with its existing heading and divider. */
+.work-progress-group{margin-top:46px;padding-top:28px;border-top:1px solid var(--line)}
+.work-progress-group>h3{margin:0 0 24px;font:500 18px/1.4 var(--project-font);color:var(--lime)}
+.work-progress-group[hidden],#work-grid[hidden]{display:none!important}
 .work-status-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:28px 0 0;padding:20px 22px;border:1px solid var(--line);background:#1a1a1a;color:var(--lime)}
 .detail .work-status-bar h2{font:400 22px/1.4 var(--work-title-face,var(--project-font));margin:0}
 .work-status-bar>span{font:400 16px/1.6 'PingFang SC',sans-serif;color:#bbb}
