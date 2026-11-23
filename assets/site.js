@@ -128,30 +128,24 @@ document.querySelectorAll('[data-thumbnail-gallery]').forEach(gallery=>{
 // Show only artist-supplied Chinese, preserving an uninterrupted English default.
 document.querySelectorAll('[data-translation-toggle]').forEach(button=>{button.addEventListener('click',()=>{const block=button.closest('[data-translation-block]');const original=document.getElementById(button.getAttribute('aria-controls'));const expanded=button.getAttribute('aria-expanded')!=='true';const translated=button.dataset.translationKind==='translation';button.setAttribute('aria-expanded',String(expanded));original.hidden=!expanded;block.classList.toggle('translation-open',expanded);button.innerHTML=(expanded?'Hide Chinese':'Show Chinese')+(translated?'':' original')+' <span lang="zh-CN">'+(translated?'中文':'中文原文')+'</span>';});});
 
-// Sorting moves the existing cards, preserving their filters, viewers and thumbnails.
+// One continuous grid: sound technology first, pure acoustic second, then chosen sort.
 (()=>{
- const filters=[...document.querySelectorAll('[data-work-filter]')],works=[...document.querySelectorAll('#work .project')];
- if(!filters.length)return;
- const grids=[...document.querySelectorAll('#work-grid,#work-progress-grid')],sort=document.querySelector('[data-work-sort]');
+ const filters=[...document.querySelectorAll('[data-work-filter]')],grid=document.getElementById('work-grid'),sort=document.querySelector('[data-work-sort]');
+ if(!filters.length||!grid||!sort)return;
+ const works=[...grid.children],status=document.querySelector('.filter-status');
  const titleOrder=new Intl.Collator('en',{sensitivity:'base',numeric:true});
  const compareTitle=(a,b)=>titleOrder.compare(a.dataset.title,b.dataset.title);
+ const compareGroup=(a,b)=>Number(a.dataset.soundGroup==='acoustic')-Number(b.dataset.soundGroup==='acoustic');
  const applySort=()=>{
-  grids.forEach(grid=>{
-   const ordered=[...grid.children].sort((a,b)=>sort.value==='title'?compareTitle(a,b):(b.dataset.created||'').localeCompare(a.dataset.created||'')||compareTitle(a,b));
-   grid.append(...ordered);
-  });
+  const ordered=[...grid.children].sort((a,b)=>compareGroup(a,b)||(sort.value==='title'?compareTitle(a,b):(b.dataset.created||'').localeCompare(a.dataset.created||'')||compareTitle(a,b)));
+  grid.append(...ordered);
  };
- if(grids.length&&sort){sort.value='created';applySort();sort.addEventListener('change',applySort)}
- const status=document.querySelector('.filter-status');
- const updateCount=()=>{
-  status.textContent=works.filter(work=>!work.hidden).length+' works';
-  const progress=document.querySelector('[data-work-progress]');
-  if(progress)progress.hidden=![...progress.querySelectorAll('.project')].some(work=>!work.hidden);
- };
+ sort.value='created';applySort();sort.addEventListener('change',applySort);
+ const updateCount=()=>{status.textContent=works.filter(work=>!work.hidden).length+' works'};
  filters.forEach(button=>button.addEventListener('click',()=>{
-  const category=button.dataset.workFilter;
+  const group=button.dataset.workFilter;
   filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
-  works.forEach(work=>work.hidden=category!=='all'&&!work.dataset.categories.split(' ').includes(category));
+  works.forEach(work=>work.hidden=group!=='all'&&work.dataset.soundGroup!==group);
   updateCount();
  }));
  updateCount();
