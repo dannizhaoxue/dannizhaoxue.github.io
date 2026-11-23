@@ -38,14 +38,16 @@ body[data-project-view=list] .project-grid{display:block;border-top:1px solid #4
 .portrait-footer{bottom:12px}
 @media(max-width:1050px){.portrait-stage{height:43vw;min-height:330px}.portrait-stage .portrait-person{width:50vw}.portrait-word-back{top:3%;font-size:31vw}.portrait-word-front{top:70%;font-size:28vw}}
 @media(max-width:650px){.portrait-stage{height:355px;min-height:0}.portrait-stage .portrait-person{width:min(92vw,380px);bottom:-2%}.portrait-word-back{top:3%;font-size:40vw}.portrait-word-front{top:78%;font-size:29vw}.portrait-footer{bottom:10px;font-size:11px}}
-/* Keep the whole portrait/type composition inside the requested shallow band. */
-.portrait-stage{height:clamp(280px,37.5vw,540px);min-height:0}
-.portrait-stage .portrait-person{height:103%;width:auto;aspect-ratio:1;max-width:none;bottom:-3%}
+/* Compact portrait band with a proportionally smaller, top-aligned portrait. */
+.portrait-stage{--portrait-composition-height:clamp(280px,37.5vw,540px);height:clamp(240px,32.25vw,464px);min-height:0}
+.portrait-composition{height:var(--portrait-composition-height);bottom:auto}
+.portrait-stage .portrait-person{height:88%;width:auto;aspect-ratio:1;max-width:none;top:0;bottom:auto}
 .portrait-stage .portrait-person img{width:100%;height:100%;object-fit:contain}
 .portrait-word-back{top:1%;font-size:clamp(160px,40vw,710px)}
 .portrait-word-front{top:61%;font-size:clamp(105px,17vw,295px)}
 .portrait-footer{bottom:10px}
-@media(max-width:650px){.portrait-stage{height:280px}.portrait-word-back{top:1%;font-size:40vw}.portrait-stage .portrait-person{height:104%;width:auto;bottom:-4%}.portrait-word-front{top:64%;font-size:31vw}.portrait-footer{font-size:11px;bottom:8px}}
+.portrait-footer p,.portrait-footer a{background:#111;padding:1px 3px}
+@media(max-width:650px){.portrait-stage{--portrait-composition-height:280px;height:240px}.portrait-word-back{top:1%;font-size:40vw}.portrait-stage .portrait-person{height:88%;width:auto;top:0;bottom:auto}.portrait-word-front{top:64%;font-size:31vw}.portrait-footer{font-size:11px;bottom:8px}}
 /* Project information uses a neutral reading face, separate from poster display type. */
 .projects-section,.index-bar{font-family:'Helvetica Neue',Arial,sans-serif}
 .project .cover-title{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:clamp(24px,2.1vw,34px);line-height:1.15;letter-spacing:-.02em;text-transform:none}
