@@ -1,0 +1,8 @@
+@font-face{font-family:DanniBio-Noto;src:url('biography-fonts/noto-sans-sc.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:DanniBio-Smiley;src:url('biography-fonts/smiley-sans.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:DanniBio-Douyin;src:url('biography-fonts/douyin-sans.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+/* Body font auditions. */
+@font-face{font-family:DanniBio-WenKai;src:url('biography-fonts/wenkai-light.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:DanniBio-WenKai;src:url('biography-fonts/wenkai-regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:DanniBio-XiaoWei;src:url('biography-fonts/xiaowei.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:DanniBio-NeoXiHei;src:url('biography-fonts/neo-xihei.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}

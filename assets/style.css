@@ -1,0 +1,724 @@
+:root{--font-english:'Avenir Next Condensed','Arial Narrow',sans-serif;--font-display:Impact,'Arial Narrow',sans-serif;--display-weight:400;--font-chinese:'Danni-glowNarrow',sans-serif;--name-weight:400;--name-spacing:.025em;--lime:#d2ff00;--ink:#111;--paper:#111;--muted:#bbb;--line:#444;--tile-bg:#202020;--accent:#d2ff00}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:var(--paper);color:#f3f3f1;font:18px/1.5 var(--font-english)}button{font:inherit;cursor:pointer}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:4px}button:focus-visible,a:focus-visible{outline:2px solid currentColor;outline-offset:5px}h1,h2,h3,p,figure{margin:0}[hidden]{display:none!important}.chinese-name{font-family:var(--font-chinese);font-weight:var(--name-weight);letter-spacing:var(--name-spacing)}.skip{position:fixed;left:15px;top:-100px;z-index:5}.skip:focus{top:15px;background:var(--lime);color:#111;padding:10px}.site-header{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:14px 24px 5px;background:var(--lime);color:#111}.site-name{font-size:15px;font-weight:700;line-height:1.3}.site-name .chinese-name{font-size:14px;margin-left:12px}.site-header nav{display:flex;gap:25px;font-size:14px;font-weight:650}.page-content{width:100%;margin:0 auto}
+.poster{padding:0 20px 13px;background:var(--lime);color:#111;overflow:hidden}.poster-title{font-family:var(--font-display);font-weight:var(--display-weight);line-height:.86;letter-spacing:-.04em;text-transform:uppercase}.poster-row{display:flex;align-items:center;justify-content:space-between;gap:18px;white-space:nowrap;font-size:clamp(48px,9.7vw,170px);line-height:.88;min-width:0}.poster-big{display:block;flex:none;letter-spacing:-.02em;line-height:.89}.poster-note{display:block;flex:0 0 190px;font-size:clamp(12px,1.45vw,23px);font-weight:500;letter-spacing:-.02em;line-height:1.02;text-transform:none;white-space:normal}.contact-note{flex-basis:275px;font-size:clamp(12px,1.25vw,21px);align-self:end;padding-bottom:7px}.contact-note a{white-space:normal;overflow-wrap:anywhere}.poster-fields{font-size:clamp(13px,1.6vw,24px);font-weight:500;text-align:center;line-height:1.1;letter-spacing:-.02em;margin-top:8px}
+.portrait-stage{position:relative;height:clamp(320px,38vw,620px);padding:50px 20px 0;overflow:hidden;background:#111;color:#f1f1ef}.portrait-type{position:absolute;font-size:44vw;font-weight:900;letter-spacing:-.065em;line-height:.75;left:-2vw;top:24px;white-space:nowrap;pointer-events:none}.portrait-stage figure{position:relative;margin:10px auto 0;width:min(37vw,490px);z-index:1}.portrait-stage img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}.portrait-stage figcaption{font-size:14px;padding:7px 0;color:#ddd}.portrait-caption{position:absolute;bottom:20px;right:25px;font-size:14px;letter-spacing:.02em;z-index:2;background:#111;padding:3px 7px}
+.index-bar{padding:20px 25px;border-top:1px solid #444;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:17px;font-weight:650}.view-toggle{display:flex;gap:4px}.view-toggle button{border:1px solid #777;background:transparent;color:#ddd;font-size:15px;padding:5px 15px}.view-toggle button[aria-pressed=true]{background:var(--lime);border-color:var(--lime);color:#111}.projects-section{padding:28px 25px 50px}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;padding-bottom:14px}.section-heading h2{font-size:clamp(48px,6.8vw,105px);font-weight:900;letter-spacing:-.04em;line-height:.9;color:var(--lime)}.section-heading p{font-size:16px;line-height:1.4}.media-note{font-size:13px;color:#aaa;margin:8px 0 20px}.project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 20px}.project{min-width:0}.art{position:relative;display:block;aspect-ratio:3/2;background:var(--tile-bg);overflow:hidden}.art img,.art svg{display:block;width:100%;height:100%;object-fit:cover;transition:transform .25s}.art svg{opacity:.5}.art:hover img,.art:hover svg{transform:scale(1.025)}.cover-title{position:absolute;left:16px;right:16px;top:14px;font-size:clamp(26px,3.4vw,55px);font-weight:850;letter-spacing:-.035em;line-height:.94;text-transform:uppercase;overflow-wrap:anywhere;color:#efefed}.cover-note{position:absolute;left:12px;bottom:10px;background:#111;color:#bbb;padding:2px 6px;font-size:12px}.card-info{padding-top:12px}.card-info h3{font-size:26px;line-height:1.15;font-weight:700;letter-spacing:-.02em}.project-meta{margin-top:5px;display:flex;justify-content:space-between;gap:15px}.tags{font-size:15px;color:#bcbcbc}.description{display:none;font-size:18px;line-height:1.5;margin-top:10px}.project-link{display:none;color:var(--lime);font-size:16px;text-decoration:underline;text-underline-offset:4px}.project:hover h3{color:var(--lime)}.research-grid{padding-top:8px}
+body[data-project-view=list] .project-grid{display:block;border-top:1px solid #444}body[data-project-view=list] .project{display:grid;grid-template-columns:190px minmax(0,1fr) 170px;gap:25px;padding:23px 0;border-bottom:1px solid #444}body[data-project-view=list] .card-info{padding:0}body[data-project-view=list] .description{display:block}body[data-project-view=list] .project-meta{margin:0;flex-direction:column;justify-content:space-between;align-items:start}body[data-project-view=list] .project-link{display:block}body[data-project-view=list] .cover-title{font-size:25px;left:12px;top:10px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:35px;border-top:1px solid #444;padding:35px 25px 50px}.about h2{font-size:clamp(75px,12vw,185px);font-weight:900;line-height:.85;letter-spacing:-.04em;color:var(--lime)}.about h3{font-size:30px;font-weight:700;margin-bottom:20px}.about h3 .chinese-name{font-size:23px;margin-left:15px}.about p{font-size:21px;line-height:1.55;max-width:650px;margin-bottom:20px}.about a{font-size:19px;color:var(--lime);overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:4px}.about .cv-note{font-size:15px;color:#aaa;margin-top:25px}footer{padding:22px 25px;border-top:1px solid #444;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:15px;color:#bbb}footer>div{display:flex;gap:20px}
+.detail{padding:28px 25px 0}.back{font-size:16px;color:var(--lime)}.detail-title{padding:35px 0 30px}.eyebrow{font-size:17px;margin-bottom:15px}.detail-title h1{font-size:clamp(58px,9.5vw,150px);font-weight:900;line-height:.95;letter-spacing:-.04em;text-transform:uppercase;overflow-wrap:anywhere;color:var(--lime)}.detail-art{position:relative}.detail-art svg{width:100%;height:auto;max-height:450px;object-fit:cover;display:block}.art-label{position:absolute;left:12px;bottom:12px;background:#111;color:#aaa;font-size:13px;padding:4px 8px}.overview{display:grid;grid-template-columns:1fr 2fr;gap:25px;padding:28px 0 40px;margin-top:25px;border-top:1px solid #444}.overview h2{font-size:38px;font-weight:800;letter-spacing:-.03em}.overview p{font-size:24px;line-height:1.5}.overview .editorial-note{font-size:16px;color:#aaa;padding-top:20px;margin-top:25px;border-top:1px solid #444}.next{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-top:1px solid #444;padding:22px 0 45px}.next span{font-size:16px;color:#bbb}.next a{font-size:30px;color:var(--lime)}
+@media(min-width:1800px){.site-header,.page-content{max-width:1800px;margin:auto}.poster-row{font-size:170px}.portrait-type{font-size:790px}}
+@media(max-width:1050px){.poster-note{flex-basis:140px}.contact-note{flex-basis:200px}.poster-row{gap:12px}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cover-title{font-size:40px}body[data-project-view=list] .project{grid-template-columns:145px minmax(0,1fr);gap:20px}body[data-project-view=list] .project-meta{grid-column:2;flex-direction:row}.portrait-stage{height:42vw}.portrait-stage figure{width:38vw}}
+@media(max-width:650px){.site-header{padding:12px 12px 8px;flex-wrap:wrap;gap:10px}.site-name{font-size:13px}.site-name .chinese-name{font-size:13px;margin-left:7px}.site-header nav{gap:17px;font-size:12px;width:100%;justify-content:space-between}.poster{padding:0 10px 10px}.poster-row{gap:7px;line-height:.94}.poster-big{letter-spacing:-.02em;line-height:.93}.poster-note{flex-basis:73px;font-size:10px;line-height:1.05}.contact-note{flex-basis:110px;font-size:10px;padding-bottom:2px}.poster-fields{font-size:12px;line-height:1.15;margin-top:8px}.portrait-stage{height:315px;padding-top:30px}.portrait-type{top:28px;font-size:48vw;left:-4vw}.portrait-stage figure{width:62vw;max-width:300px;margin-top:12px}.portrait-stage figcaption{font-size:12px}.portrait-caption{right:12px;bottom:12px;font-size:12px}.index-bar{padding:15px 13px;font-size:14px;gap:12px}.view-toggle button{padding:4px 10px;font-size:14px}.projects-section{padding:24px 13px 35px}.section-heading{align-items:start;flex-direction:column;gap:10px}.section-heading h2{font-size:60px}.section-heading p{font-size:14px}.project-grid{gap:25px 13px}.cover-title{font-size:28px;left:12px;top:12px}.card-info h3{font-size:23px}.tags{font-size:13px}.cover-note{font-size:10px;left:8px;bottom:8px}.media-note{font-size:12px;line-height:1.5}.about{grid-template-columns:1fr;padding:28px 13px;gap:25px}.about h2{font-size:100px}.about h2 br{display:none}.about h3{font-size:27px}.about p{font-size:20px}.about a{font-size:17px}footer{font-size:13px;padding:20px 13px}.detail{padding:25px 13px 0}.detail-title h1{font-size:65px}.overview{grid-template-columns:1fr;gap:15px}.overview h2{font-size:32px}.overview p{font-size:21px}.next a{font-size:27px}.art-label{font-size:11px}.description{font-size:17px}body[data-project-view=list] .project{grid-template-columns:90px minmax(0,1fr);gap:15px}body[data-project-view=list] .cover-title{font-size:17px;left:8px;top:8px}body[data-project-view=list] .cover-note{display:none}body[data-project-view=list] .project-meta{flex-direction:column;gap:8px}.project-link{font-size:15px}}
+@media(max-width:430px){.project-grid{grid-template-columns:1fr}.cover-title{font-size:42px}.index-bar{font-size:13px}.poster-note{flex-basis:65px;font-size:9px}.contact-note{flex-basis:110px;font-size:11px}.site-header nav{font-size:11px}.portrait-caption{bottom:10px}.poster-fields{font-size:11px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.art svg,.art img{transition:none}}
+
+.portrait-type,.section-heading h2,.about h2,.detail-title h1{font-family:var(--font-display);font-weight:var(--display-weight)}
+.poster-note{font-family:var(--font-english)}
+/* Original-photo pixels with a transparent silhouette, layered typography. */
+.portrait-stage{height:clamp(430px,58vw,780px);padding:0;isolation:isolate;--portrait-x:0px;--portrait-y:0px;--back-x:0px;--back-y:0px;--front-x:0px;--front-y:0px;background:radial-gradient(ellipse at 50% 72%,#25341d55,transparent 60%),#111}
+.portrait-composition{position:absolute;inset:0;overflow:hidden}
+.portrait-word{position:absolute;left:50%;font-family:var(--font-display);font-weight:var(--display-weight);line-height:.82;letter-spacing:-.035em;white-space:nowrap;pointer-events:none;will-change:transform}
+.portrait-word-back{top:9%;font-size:clamp(170px,31vw,570px);z-index:0;color:#f1f1ed;transform:translateX(-50%) translate3d(var(--back-x),var(--back-y),0)}
+.portrait-stage .portrait-person{position:absolute;bottom:0;left:50%;width:min(57vw,760px);margin:0;z-index:1;transform:translateX(-50%) translate3d(var(--portrait-x),var(--portrait-y),0);will-change:transform}
+.portrait-stage .portrait-person img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;mask-image:url('danni-alpha-guide-v1.png');mask-mode:alpha;mask-size:100% 100%;mask-repeat:no-repeat;-webkit-mask-image:url('danni-alpha-guide-v1.png');-webkit-mask-size:100% 100%;-webkit-mask-repeat:no-repeat}
+.portrait-word-front{top:69%;font-size:clamp(145px,28vw,510px);z-index:2;color:transparent;-webkit-text-stroke:1.4px var(--lime);transform:translateX(-50%) translate3d(var(--front-x),var(--front-y),0)}
+.portrait-footer{position:absolute;left:25px;right:25px;bottom:18px;z-index:3;display:flex;align-items:end;justify-content:space-between;gap:20px;font-size:14px;line-height:1.5;color:#eee}.portrait-footer a{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:1050px){.portrait-stage{height:62vw;min-height:430px}.portrait-stage .portrait-person{width:64vw}.portrait-word-back{font-size:34vw;top:13%}.portrait-word-front{font-size:31vw;top:69%}}
+@media(max-width:650px){.portrait-stage{height:470px;min-height:0}.portrait-stage .portrait-person{width:min(100vw,470px)}.portrait-word-back{font-size:41vw;top:18%;letter-spacing:-.02em}.portrait-word-front{font-size:40vw;top:74%;-webkit-text-stroke:1px var(--lime)}.portrait-footer{left:13px;right:13px;bottom:13px;gap:15px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.portrait-word,.portrait-stage .portrait-person{will-change:auto}}
+
+.site-name{font-family:var(--font-display);font-weight:var(--display-weight)}
+@media(max-width:650px){.portrait-word-front{top:79%;font-size:30vw}}
+
+/* Fixed portrait composition: tighter footprint, no pointer motion. */
+.portrait-stage{height:clamp(340px,39vw,560px);min-height:0;background:#111}
+.portrait-word-back{top:3%;font-size:clamp(155px,29vw,540px);transform:translateX(-50%);will-change:auto}
+.portrait-stage .portrait-person{width:min(45vw,620px);bottom:-3%;transform:translateX(-50%);will-change:auto}
+.portrait-word-front{top:68%;font-size:clamp(135px,24vw,440px);transform:translateX(-50%);will-change:auto}
+.portrait-footer{bottom:12px}
+@media(max-width:1050px){.portrait-stage{height:43vw;min-height:330px}.portrait-stage .portrait-person{width:50vw}.portrait-word-back{top:3%;font-size:31vw}.portrait-word-front{top:70%;font-size:28vw}}
+@media(max-width:650px){.portrait-stage{height:355px;min-height:0}.portrait-stage .portrait-person{width:min(92vw,380px);bottom:-2%}.portrait-word-back{top:3%;font-size:40vw}.portrait-word-front{top:78%;font-size:29vw}.portrait-footer{bottom:10px;font-size:11px}}
+/* Keep the whole portrait/type composition inside the requested shallow band. */
+.portrait-stage{height:clamp(280px,37.5vw,540px);min-height:0}
+.portrait-stage .portrait-person{height:103%;width:auto;aspect-ratio:1;max-width:none;bottom:-3%}
+.portrait-stage .portrait-person img{width:100%;height:100%;object-fit:contain}
+.portrait-word-back{top:1%;font-size:clamp(160px,40vw,710px)}
+.portrait-word-front{top:61%;font-size:clamp(105px,17vw,295px)}
+.portrait-footer{bottom:10px}
+@media(max-width:650px){.portrait-stage{height:280px}.portrait-word-back{top:1%;font-size:40vw}.portrait-stage .portrait-person{height:104%;width:auto;bottom:-4%}.portrait-word-front{top:64%;font-size:31vw}.portrait-footer{font-size:11px;bottom:8px}}
+/* Project information uses a neutral reading face, separate from poster display type. */
+.projects-section,.index-bar{font-family:'Helvetica Neue',Arial,sans-serif}
+.project .cover-title{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:clamp(24px,2.1vw,34px);line-height:1.15;letter-spacing:-.02em;text-transform:none}
+.project .card-info h3{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:22px;font-weight:500;line-height:1.35;letter-spacing:-.01em}
+.project .tags{font-size:14px;line-height:1.6;font-weight:400}
+.project .cover-note{font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:400}
+.project .description{font-size:16px;line-height:1.75;font-weight:400}
+.project .project-link{font-size:14px;font-weight:400}
+@media(max-width:650px){.project .cover-title{font-size:26px}.project .card-info h3{font-size:22px}}
+
+.project .card-info{padding-top:14px}.project .project-meta{margin-top:6px}.project .tags{color:#b2b2b2;font-size:14px;line-height:1.65;letter-spacing:0}.project .cover-note{font-size:11px;color:#aaa;background:transparent;padding:0}.project .art{border:1px solid #292929}
+
+/* Project reading type is chosen independently from display and Chinese name fonts. */
+:root{--project-font:'Gill Sans',Arial,sans-serif;--project-title-weight:500;--project-tracking:0;--type-copy:clamp(14px,1.6vw,19px);--type-project-title:clamp(18px,1.85vw,22px);--type-meta:clamp(12px,1.3vw,15px);--type-small:clamp(11px,1.1vw,13px);--type-section:clamp(42px,5.4vw,76px)}
+.projects-section,.index-bar,.overview,.next{font-family:var(--project-font)}
+.project .card-info h3{font-family:var(--project-font);font-size:var(--type-project-title);font-weight:var(--project-title-weight);letter-spacing:var(--project-tracking)}
+.project .cover-note,.project .description,.project .tags,.project .project-link{font-family:var(--project-font)}
+
+/* Reading scale follows the poster's inset copy; images retain the visual weight. */
+.about,footer,.detail{font-family:var(--project-font)}
+.index-bar{font-size:var(--type-meta);font-weight:500;padding-block:14px;gap:12px}
+.view-toggle button{font-size:var(--type-meta);font-weight:400;padding:5px 12px;line-height:1.4}
+.section-heading h2,.about h2{font-size:var(--type-section);line-height:.95}
+.section-heading p,.project .tags{font-size:var(--type-meta);line-height:1.5}
+.media-note,.project .cover-note{font-size:var(--type-small);line-height:1.5}
+.project .description{font-size:var(--type-copy);line-height:1.6;max-width:64ch}
+.project .project-link{font-size:var(--type-meta)}
+.project .card-info{padding-top:10px}
+.project .project-meta{margin-top:4px}
+.about{grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:32px;padding-block:32px 40px}
+.about>div{min-width:0;max-width:60ch}
+.about h3{font-family:var(--project-font);font-size:var(--type-project-title);font-weight:500;line-height:1.35;margin-bottom:14px}
+.about h3 .chinese-name{font-size:.88em;margin-left:12px}
+.about p{font-size:var(--type-copy);line-height:1.65;max-width:60ch;margin-bottom:16px}
+.about a{font-size:var(--type-copy);line-height:1.5}
+.about .cv-note{font-size:var(--type-meta);margin-top:18px;margin-bottom:0}
+footer{font-size:var(--type-meta);line-height:1.5;padding-block:18px}
+.back,.eyebrow,.next span{font-size:var(--type-meta)}
+.overview h2{font-size:var(--type-project-title);font-weight:500;letter-spacing:var(--project-tracking)}
+.overview p{font-size:var(--type-copy);line-height:1.65;max-width:64ch}
+.overview .editorial-note,.art-label{font-size:var(--type-small);line-height:1.5}
+.next a{font-size:var(--type-project-title)}
+@media(max-width:650px){
+ .about{grid-template-columns:1fr;gap:22px;padding-block:26px 30px}
+ .index-bar{padding-block:12px}
+ .view-toggle{flex-shrink:0}
+ .view-toggle button{padding:5px 10px}
+ .section-heading{gap:8px}
+ .portrait-footer{font-family:var(--project-font)}
+}
+
+/* Project detail keeps film, narrative and credits within one reading frame. */
+.work-detail{--type-copy:clamp(14px,1.15vw,16px);--type-project-title:clamp(18px,1.5vw,20px);--type-meta:clamp(12px,1.05vw,14px);--type-small:12px;width:100%;max-width:1240px;margin-inline:auto;padding:20px 28px 0}
+.work-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);grid-template-areas:"heading heading" "film intro" "film credits" "story story";grid-template-rows:auto min-content 1fr auto;column-gap:32px;row-gap:20px;align-items:start}
+.work-heading{grid-area:heading;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);grid-template-areas:"title identity" "date .";gap:8px 32px;align-items:center;padding:18px 0 0;min-width:0}
+.work-heading h1{grid-area:title;font-family:var(--font-display);font-weight:var(--display-weight);font-size:clamp(56px,6.5vw,88px);line-height:.95;letter-spacing:-.025em;text-transform:uppercase;color:var(--lime);display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px}
+:root{--work-title-font:'DanniWorkTitle-eqNarrow',sans-serif;--work-title-weight:400;--work-title-spacing:.025em}
+.work-chinese-title{font-family:var(--work-title-font);font-size:clamp(22px,2vw,28px);font-weight:var(--work-title-weight);line-height:1.3;letter-spacing:var(--work-title-spacing)}
+.work-identity{grid-area:identity;display:flex;flex-direction:column;gap:6px;font-size:clamp(16px,1.4vw,20px);line-height:1.35;text-align:left;min-width:0}
+.work-identity p:last-child{font-size:clamp(14px,1.2vw,17px);color:#bbb}
+.work-film{grid-area:film;min-width:0}
+.film-frame{position:relative;width:100%;aspect-ratio:16/9;min-height:200px;background:#050505;overflow:hidden}
+.film-link,.film-link img,.film-frame iframe{display:block;width:100%;height:100%}
+.film-link img{object-fit:contain}
+.film-link::after{content:'';position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.65));pointer-events:none}
+.film-action{position:absolute;left:18px;bottom:18px;display:flex;align-items:center;gap:10px;font-size:var(--type-copy);z-index:1}
+.film-play{width:36px;height:36px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center}
+.film-play::before{content:'';border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid currentColor;margin-left:3px}
+.film-link:hover .film-action{color:var(--lime)}
+.film-frame iframe{position:absolute;inset:0;border:0}
+.work-film figcaption{font-size:var(--type-small);line-height:1.5;color:#bbb;padding-top:10px}
+.work-film figcaption a{display:inline-block;margin-top:5px;text-decoration:underline;text-underline-offset:4px}
+.work-introduction{grid-area:intro;font-size:var(--type-copy);line-height:1.6;min-width:0}
+.work-text-section{padding:22px 0 28px;border-top:1px solid var(--line);min-width:0}
+.work-text-section h2{font-size:var(--type-project-title);font-weight:500;line-height:1.35;letter-spacing:var(--project-tracking);margin-bottom:16px}
+.work-story{grid-area:story}
+.work-prose{font-size:var(--type-copy);line-height:1.6;columns:2;column-gap:32px}
+.work-prose p{break-inside:avoid-column}
+.work-prose p+p{margin-top:1em}
+.work-credits{grid-area:credits;padding-block:18px}
+.work-credits h2{font-size:18px;margin-bottom:12px}
+.work-credits dl{margin:0;font-size:var(--type-meta);line-height:1.5}
+.work-credits dl>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #2e2e2e}
+.work-credits dl>div:first-child{padding-top:0}
+.work-credits dl>div:last-child{border-bottom:0}
+.work-credits dt{font-size:12px;color:#aaa}
+.work-credits dd{margin:0;overflow-wrap:anywhere}
+.work-detail .next{margin-top:0;padding:20px 0 28px}
+.work-detail .next>a{font-size:var(--type-meta);color:#bbb}
+.work-detail .next>div{display:flex;gap:16px;align-items:baseline}
+@media(max-width:850px){
+ .work-detail{padding-inline:20px}
+ .work-layout{grid-template-columns:1fr;grid-template-areas:"heading" "film" "intro" "story" "credits";grid-template-rows:auto;row-gap:20px}
+ .work-heading{grid-template-columns:1fr;grid-template-areas:"title" "date" "identity";gap:12px}
+ .work-prose{columns:1;max-width:78ch}
+}
+@media(max-width:650px){
+ .work-detail{padding-inline:13px}
+ .film-action{left:14px;bottom:14px;gap:9px}
+ .film-play{width:34px;height:34px}
+ .work-credits dl>div{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:12px}
+ .work-detail .next>div{flex-direction:column;gap:3px;align-items:end}
+}
+
+/* Pair the two scripts by their visible cap height. */
+.site-name{display:inline-flex;align-items:center;gap:12px;line-height:1}
+.site-name .english-name{display:block;line-height:1}
+.site-name .chinese-name{display:block;margin-left:0;font-size:.86em;line-height:1}
+@media(max-width:650px){.site-name{gap:7px}}
+
+.work-created{grid-area:date;font-size:var(--type-meta);font-weight:400;line-height:1.5;color:#aaa;white-space:nowrap}
+
+/* Keep the green navigation band symmetric around its content. */
+.site-header{padding:10px 24px;align-items:center}
+.card-title-line{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px}
+.project-date{font-family:var(--project-font);font-size:var(--type-meta);font-weight:400;line-height:1.5;color:#aaa;white-space:nowrap}
+@media(max-width:650px){.site-header{padding:10px 12px}}
+
+/* Figures and scene information from the artist's project paper. */
+.work-documentation{font-size:var(--type-copy);line-height:1.6}
+.work-document-section{padding:24px 0 28px;border-top:1px solid var(--line)}
+.work-document-heading{display:flex;align-items:start;justify-content:space-between;gap:16px 28px;margin-bottom:18px}
+.work-document-heading h2{font-size:var(--type-project-title);font-weight:500;line-height:1.35;margin-bottom:7px}
+.work-document-heading p{font-size:var(--type-meta);color:#bbb;max-width:70ch}
+.vessel-atlas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.vessel-atlas figure{min-width:0}
+.vessel-atlas a{display:flex;height:146px;align-items:center;justify-content:center;background:transparent;padding:12px}
+.vessel-atlas img{display:block;width:auto;height:100%;max-width:100%;object-fit:contain}
+.vessel-atlas figcaption{padding-top:7px;font-size:var(--type-meta);line-height:1.4}
+.document-source{font-size:12px;color:#aaa;line-height:1.5;margin-top:14px}
+.document-source a,.work-workflow figcaption a,.scene-table caption a{text-decoration:underline;text-underline-offset:3px}
+.work-system-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:32px;align-items:start}
+.work-workflow{min-width:0}
+.work-workflow>a{display:block;background:#111}
+.work-workflow img{display:block;width:100%;height:auto}
+.work-workflow figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px 14px;font-size:12px;color:#aaa;margin-top:9px}
+.work-system-notes>div+div{margin-top:22px}
+.work-system-notes h3{font-size:var(--type-copy);font-weight:500;margin-bottom:7px;line-height:1.4}
+.work-system-notes p{font-size:var(--type-meta);color:#bbb;line-height:1.6}
+.scene-table-wrap{overflow-x:auto;max-width:100%}
+.scene-table-wrap:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+.scene-table{width:100%;min-width:700px;border-collapse:collapse;font-size:var(--type-meta);line-height:1.5;text-align:left}
+.scene-table caption{text-align:left;color:#aaa;font-size:12px;padding-bottom:12px}
+.scene-table th,.scene-table td{border-bottom:1px solid #333;padding:12px 16px 12px 0;vertical-align:top;font-weight:400}
+.scene-table thead th{color:#aaa;border-bottom-color:#666;font-size:12px;padding-top:0}
+.scene-table tbody th{font-weight:500;color:#f3f3f1;white-space:nowrap}
+.scene-table td:last-child,.scene-table th:last-child{padding-right:0}
+.scene-table .scene-time{white-space:nowrap;color:#bbb;width:135px}
+.scene-table th:nth-child(2){width:13%}.scene-table td:nth-child(3){width:22%;color:#bbb}
+.table-hint{display:none}
+@media(max-width:850px){
+ .vessel-atlas{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+ .vessel-atlas a{height:120px;padding:10px}
+ .work-system-layout{grid-template-columns:1fr;gap:18px}
+ .work-system-notes{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+ .work-system-notes>div+div{margin-top:0}
+}
+@media(max-width:650px){
+ .work-document-heading{flex-direction:column;gap:12px;margin-bottom:16px}
+ .vessel-atlas{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
+ .vessel-atlas a{height:118px}
+ .work-system-notes{grid-template-columns:1fr;gap:16px}
+ .table-hint{display:block;font-size:12px;color:#aaa;margin-bottom:8px}
+ .scene-table .scene-time{width:115px}
+}
+
+/* Theme the figure presentation in the browser, preserving original source assets. */
+.media-filters{position:absolute;pointer-events:none}
+.pointcloud-media{filter:url(#paper-white-alpha)}
+.workflow-media{filter:invert(1) hue-rotate(180deg);mix-blend-mode:screen}
+.vessel-atlas a{border:1px solid #303030;background:#151515}
+.work-media-viewer{width:min(94vw,1600px);max-height:94vh;padding:16px;border:1px solid #444;background:#111;color:#eee}
+.work-media-viewer[open]{display:flex;flex-direction:column;gap:14px}
+.work-media-viewer::backdrop{background:rgba(0,0,0,.88)}
+.media-viewer-toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;font:16px/1.4 var(--project-font)}
+.media-viewer-toolbar button{padding:6px 12px;background:transparent;color:#eee;border:1px solid #777;font-size:14px}
+.work-media-viewer img{display:block;max-width:100%;max-height:calc(90vh - 90px);width:auto;height:auto;object-fit:contain;align-self:center}
+/* Subtle pointer parallax within the approved compact portrait band. */
+.portrait-stage .portrait-person{transform:translateX(-50%) translate3d(var(--portrait-x),var(--portrait-y),0);transition:transform .22s ease-out}
+.portrait-word-back{transform:translateX(-50%) translate3d(var(--back-x),var(--back-y),0);transition:transform .3s ease-out}
+.portrait-word-front{transform:translateX(-50%) translate3d(var(--front-x),var(--front-y),0);transition:transform .22s ease-out}
+@media(prefers-reduced-motion:reduce){.portrait-word,.portrait-stage .portrait-person{transform:translateX(-50%)!important;transition:none!important}}
+
+/* Completed work pages share the approved typography and bounded media layout. */
+.work-still>a{display:block;width:100%;aspect-ratio:16/9;background:#111}
+.work-still img{display:block;width:100%;height:100%;object-fit:contain}
+.work-still figcaption{font-size:12px;line-height:1.5;color:#aaa;margin-top:10px}
+.work-heading:has(>.work-created){grid-template-areas:"title identity" "date ."}
+.work-heading:not(:has(>.work-created)){grid-template-areas:"title identity"}
+.project-wrong-passenger .work-heading h1,.project-crookes-green .work-heading h1{font-size:clamp(44px,4.8vw,68px)}
+.work-heading h1.work-native-title{font-family:var(--work-title-font);font-weight:var(--work-title-weight);font-size:clamp(48px,6vw,76px);letter-spacing:.025em}
+.project .card-info h3.native-project-title{font-family:var(--work-title-font);font-weight:var(--work-title-weight)}
+.project-depth{font-size:var(--type-copy);line-height:1.6}
+.project-depth>.work-document-section>h2{font-size:var(--type-project-title);line-height:1.35;font-weight:500;margin-bottom:18px}
+.project-doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.project-doc-grid.media-count-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.project-document-image{min-width:0}
+.project-document-image a{display:block;aspect-ratio:16/9;overflow:hidden;background:#181818}
+.project-document-image img{display:block;width:100%;height:100%;object-fit:cover}
+.project-document-image figcaption{font-size:var(--type-meta);line-height:1.5;color:#bbb;padding-top:8px}
+.concept-reading{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.concept-definition{font-size:var(--type-copy);line-height:1.65;max-width:65ch}
+.work-artist-statement{font-size:clamp(18px,1.5vw,22px);line-height:1.5;color:var(--lime);max-width:65ch;margin-top:24px}
+.concept-traces{margin:0}
+.concept-traces>div+div{border-top:1px solid #333;margin-top:15px;padding-top:15px}
+.concept-traces dt{font-size:var(--type-copy);font-weight:500;margin-bottom:5px}
+.concept-traces dd{font-size:var(--type-meta);line-height:1.6;color:#bbb;margin:0}
+.trace-example{margin-top:25px;border-top:1px solid #333;padding-top:20px}
+.trace-example h3{font-size:var(--type-copy);font-weight:500;margin-bottom:12px}
+.trace-example-reading{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.trace-example-reading>p{font-size:var(--type-meta);line-height:1.6;color:#bbb}
+.trace-state-table{width:100%;border-collapse:collapse;text-align:left;font-size:var(--type-meta)}
+.trace-state-table caption{text-align:left;font-size:12px;color:#aaa;padding-bottom:8px}
+.trace-state-table th,.trace-state-table td{padding:8px 12px 8px 0;border-bottom:1px solid #333;font-weight:400}
+.trace-state-table thead th{font-size:12px;color:#aaa}
+.musical-form,.signal-chain{padding:0;margin:18px 0 0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.musical-form>li,.signal-chain>li{border-top:2px solid #777;padding-top:12px}
+.musical-form>li>span{font-size:12px;color:#aaa}
+.musical-form h3,.signal-chain h3{font-size:var(--type-copy);font-weight:500;margin:5px 0 8px;line-height:1.4}
+.musical-form p,.signal-chain p,.document-note{font-size:var(--type-meta);line-height:1.6;color:#bbb}
+.signal-chain{grid-template-columns:repeat(3,minmax(0,1fr))}
+.performance-note-table{width:100%;border-collapse:collapse;font-size:var(--type-copy);line-height:1.6;text-align:left}
+.performance-note-table th,.performance-note-table td{padding:14px 0;border-bottom:1px solid #333;vertical-align:top;font-weight:400}
+.performance-note-table th{width:24%;padding-right:25px;color:#aaa;font-size:var(--type-meta)}
+@media(max-width:850px){
+ .work-heading:has(>.work-created){grid-template-areas:"title" "date" "identity"}
+ .work-heading:not(:has(>.work-created)){grid-template-areas:"title" "identity"}
+ .concept-reading,.trace-example-reading{grid-template-columns:1fr;gap:22px}
+ .musical-form{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .project-doc-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:650px){
+ .project-doc-grid,.project-doc-grid.media-count-2{grid-template-columns:1fr;gap:20px}
+ .signal-chain{grid-template-columns:1fr;gap:16px}
+ .work-artist-statement{margin-top:18px}
+ .performance-note-table th{width:30%;padding-right:15px}
+}
+
+/* The title is supplied by the page; the spatial diagram contains only positions. */
+.project-tide .work-still>a{aspect-ratio:2/1}
+
+/* Crop the recording progress strip from the Weathering gallery thumbnail. */
+.art[href="projects/weathering.html"] img{height:100%;object-fit:contain;object-position:center}
+
+/* Individual work titles take their tone from the work's own material. */
+body[data-project="vesscape"]{--lime:#e74444;--work-title-face:Georgia,'Times New Roman',serif;--work-title-size:clamp(60px,6.2vw,82px);--work-title-case:none;--work-title-track:-.055em}
+body[data-project="weathering"]{--lime:#a8cad5;--work-title-face:'Gill Sans','DanniProject-inter',sans-serif;--work-title-size:clamp(48px,5.8vw,78px);--work-title-case:none;--work-title-track:-.035em;--work-heading-weight:400}
+body[data-project="wrong-passenger"]{--lime:#24ff64;--accent:#24ff64;--work-title-face:Impact,'Arial Narrow',sans-serif;--work-title-size:clamp(42px,4.8vw,68px);--work-title-case:uppercase;--work-title-track:.005em}
+body[data-project="crookes-green"]{--lime:#09d079;--accent:#09d079;--work-title-face:Baskerville,Georgia,serif;--work-title-size:clamp(46px,5.8vw,76px);--work-title-case:none;--work-title-track:-.035em}
+body[data-project="tide"]{--lime:#d7af74;--accent:#d7af74;--work-title-face:Georgia,'Times New Roman',serif;--work-title-size:clamp(42px,5.3vw,70px);--work-title-case:none;--work-title-track:-.045em;--work-heading-style:italic}
+body[data-project="bamboo-curtain"]{--lime:#c1cdb5;--work-title-face:Georgia,serif;--work-title-size:clamp(46px,6vw,78px);--work-title-case:none;--work-title-track:-.04em}
+body[data-project="adaptive-mapping"]{--lime:#c2c2df;--work-title-face:'Gill Sans','DanniProject-inter',sans-serif;--work-title-size:clamp(42px,5.8vw,76px);--work-title-case:none;--work-title-track:-.025em}
+body[data-project="astrological-dice"]{--lime:#d5b6d0;--work-title-face:Georgia,serif;--work-title-size:clamp(42px,5.8vw,76px);--work-title-case:none;--work-title-track:-.04em}
+body[data-project="resonant-memory"]{--lime:#b8cfc7;--work-title-face:Baskerville,Georgia,serif;--work-title-size:clamp(46px,6vw,80px);--work-title-case:none;--work-title-track:-.025em}
+.detail[class*="project-"] .work-heading h1,.detail[class*="project-"] .detail-title h1{font-family:var(--work-title-face,var(--font-display));font-size:var(--work-title-size,76px);font-weight:var(--work-heading-weight,400);font-style:var(--work-heading-style,normal);line-height:1.04;letter-spacing:var(--work-title-track,-.025em);text-transform:var(--work-title-case,none);color:var(--lime);overflow-wrap:anywhere}
+.detail[class*="project-"] .work-chinese-title{font-style:normal;letter-spacing:var(--work-title-spacing)}
+.detail[class*="project-"] .next a{color:var(--lime)}
+.project-weathering .work-still>a{overflow:hidden}
+.project-weathering .work-still img{height:102%;object-fit:cover;object-position:center top}
+
+.original-programme summary,.original-answer summary{font-size:var(--type-meta);color:#becac0;cursor:pointer;text-underline-offset:4px}.original-programme details>div,.original-answer details>div,.original-answer>div{font-family:'PingFang SC','Noto Sans CJK SC',sans-serif;font-size:var(--type-copy);line-height:1.9;max-width:62ch;margin-top:20px}.original-programme p+p,.original-answer p+p{margin-top:1em}.interview-question{max-width:92ch;color:#bcc7be;font-size:var(--type-copy);line-height:1.6;margin-bottom:24px}.original-answer{margin-top:26px}
+
+.work-audio-distribution{margin-top:28px}.work-audio-distribution>h3{font-size:var(--type-project-title);font-weight:500;margin-bottom:18px}.vesscape-audio-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;gap:22px;margin:0;padding:0}.vesscape-audio-path li{border-top:1px solid #52605a;padding-top:14px}.vesscape-audio-path h3{font-family:var(--project-font);font-size:var(--type-copy);font-weight:500;color:var(--lime);line-height:1.4}.vesscape-audio-path p{font-size:var(--type-meta);color:#bcbcbc;line-height:1.6;margin-top:7px}@media(max-width:850px){.vesscape-audio-path{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){.vesscape-audio-path{grid-template-columns:1fr}}
+/* Work navigation shares the local work palette; the homepage retains its own lime. */
+.detail[class*="project-"] .back{color:var(--lime)}
+/* Section headings share their work's title treatment. */
+.detail[class*="project-"] :is(h2,h3){font-family:var(--work-title-face,var(--project-font));font-weight:var(--work-heading-weight,400);font-style:var(--work-heading-style,normal);color:var(--lime);letter-spacing:0}
+
+/* Supporting imagery follows the brief work introduction, ahead of the deeper analysis. */
+.project-weathering .work-layout{grid-template-areas:"heading heading" "film intro" "film credits" "story story" "gallery gallery";grid-template-rows:auto min-content 1fr auto auto}
+.work-early-gallery{grid-area:gallery;min-width:0;font-size:var(--type-copy);line-height:1.6}
+.work-early-gallery .work-document-section>h2{font-size:var(--type-project-title);line-height:1.35;margin-bottom:18px}
+@media(max-width:850px){.project-weathering .work-layout{grid-template-columns:1fr;grid-template-areas:"heading" "film" "intro" "story" "gallery" "credits";grid-template-rows:auto}}
+
+.bilingual-reading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;font-family:var(--project-font);font-size:var(--type-copy);line-height:1.7}.bilingual-reading>div{min-width:0}.bilingual-reading p+p{margin-top:1em}.bilingual-reading .original-copy{font-family:'PingFang SC','Noto Sans CJK SC',sans-serif;line-height:1.9}.bilingual-reading .interview-question{margin-bottom:22px;color:#a8b8ad;font-size:var(--type-meta)}@media(max-width:650px){.bilingual-reading{grid-template-columns:1fr;gap:26px}.bilingual-reading>div+div{border-top:1px solid #333;padding-top:22px}}
+
+/* English remains primary; a quiet control opens a parallel original. */
+.translation-toolbar{display:flex;justify-content:flex-end;margin:-42px 0 22px;min-height:20px}.translation-toggle{border:0;border-bottom:1px solid #666;padding:0 0 3px;background:transparent;color:#a7aaa8;font-family:var(--project-font);font-size:12px;line-height:1.5;cursor:pointer}.translation-toggle span{font-family:'PingFang SC',sans-serif;font-size:11px;margin-left:7px}.translation-toggle:hover{color:var(--lime);border-color:var(--lime)}.translation-toggle:focus-visible{outline:2px solid var(--lime);outline-offset:5px}.translation-block .bilingual-reading{display:block}.translation-block .translation-english{max-width:78ch;margin-inline:auto}.translation-block.translation-open .bilingual-reading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"original english";gap:40px}.translation-open .translation-english{grid-area:english;max-width:none;margin:0}.translation-open .original-copy{grid-area:original}.translation-block [hidden]{display:none!important}.translation-block p+p{margin-top:1em}@media(max-width:650px){.translation-toolbar{margin:0 0 18px;justify-content:flex-start}.translation-block.translation-open .bilingual-reading{grid-template-columns:1fr;grid-template-areas:"english" "original";gap:24px}.translation-open .original-copy{border-top:1px solid #333;padding-top:22px}.translation-block .bilingual-reading>div+div{border-top:0;padding-top:0}.translation-open .bilingual-reading>.original-copy{border-top:1px solid #333;padding-top:22px}}
+
+.wrong-story-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px;align-items:start}.wrong-story-grid .work-prose{columns:1}.wrong-story-grid .project-document-image img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 65%;display:block}.wrong-system-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px;align-items:start}.wrong-system-grid .project-document-image img{width:100%;height:auto;display:block}.wrong-system-grid h2{font-size:var(--type-project-title);margin-bottom:22px}.wrong-system-grid .signal-chain{grid-template-columns:1fr;gap:20px}.wrong-system-grid .work-artist-statement{font-size:var(--type-copy);margin-top:26px}.wrong-story-grid figcaption,.wrong-system-grid figcaption{font-size:12px;color:#aaa;line-height:1.5;margin-top:10px}@media(max-width:650px){.wrong-story-grid,.wrong-system-grid{grid-template-columns:1fr;gap:24px}.wrong-story-grid .project-document-image{max-width:460px}.wrong-system-grid>div{grid-row:1}}
+
+.work-filters{display:flex;align-items:center;flex-wrap:wrap;gap:8px 22px;margin:18px 0 20px}.work-filters button{border:0;border-bottom:1px solid transparent;background:transparent;color:#aaa;font:var(--type-meta)/1.5 var(--project-font);padding:3px 0;cursor:pointer}.work-filters button[aria-pressed=true]{color:var(--lime);border-color:var(--lime)}.work-filters button:hover{color:#eee}.work-filters button:focus-visible{outline:2px solid var(--lime);outline-offset:4px}.filter-status{margin-left:auto;color:#888;font-size:var(--type-small)}.project[hidden]{display:none!important}@media(max-width:650px){.work-filters{gap:10px 18px}.filter-status{width:100%;margin:0}}
+/* Keep the gesture image tall beside the narrative, rather than a short letterbox. */
+.wrong-story-grid .project-document-image>a{aspect-ratio:4/5}
+.wrong-story-grid .project-document-image img{height:100%;object-fit:cover;object-position:center}
+
+/* Project documentation sits below each cover in a native horizontal image rail. */
+.project-cover{min-width:0;align-self:start}
+.project-thumbnails{position:relative;margin-top:6px;min-width:0}
+.project-thumbnail-track{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:#777 transparent;padding-bottom:4px}
+.project-thumbnail{flex:0 0 calc((100% - 12px)/3);min-width:0;aspect-ratio:3/2;display:block;overflow:hidden;background:#202020;scroll-snap-align:start}
+.project-thumbnail img{display:block;width:100%;height:100%;object-fit:cover}
+.project-thumbnail.thumbnail-contain img{object-fit:contain}
+.project-thumbnail:hover{outline:1px solid #aaa;outline-offset:-1px}
+.project-thumbnail:focus-visible{outline:2px solid var(--lime);outline-offset:-2px}
+.project-thumbnail-track:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.thumbnail-scroll{position:absolute;top:calc(50% - 18px);display:grid;place-items:center;width:28px;height:32px;padding:0;border:1px solid #888;background:rgba(17,17,17,.9);color:#fff;z-index:1}
+.thumbnail-previous{left:2px}.thumbnail-next{right:2px}.thumbnail-next svg{transform:rotate(180deg)}
+.thumbnail-scroll:hover{background:#111;color:var(--lime)}
+.art[href="projects/crookes-green.html"] img{object-fit:contain;object-position:center}
+
+/* Original photographs pair a portrait with a wider experiment image. */
+.project-crookes-green .crookes-references{display:grid;grid-template-columns:minmax(0,.56682fr) minmax(0,1fr);gap:28px;max-width:1000px;margin:40px auto 0}
+.project-crookes-green .crookes-reference{margin:0;min-width:0}
+.project-crookes-green .crookes-reference-image{display:block}
+.project-crookes-green .crookes-reference img{display:block;width:100%;height:auto}
+.project-crookes-green .crookes-reference figcaption{padding-top:14px;font-size:14px;line-height:1.6;color:#bbb}
+.project-crookes-green .crookes-reference figcaption p{margin:0}
+.project-crookes-green .crookes-reference .reference-credit{font-size:12px;color:#999;margin-top:6px}
+.project-crookes-green .reference-sources{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;margin-top:5px}
+.project-crookes-green .reference-sources a{text-decoration:underline;text-underline-offset:3px}
+.project-crookes-green .crookes-reference-image:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+@media(max-width:650px){.project-crookes-green .crookes-references{grid-template-columns:1fr;gap:30px;margin-top:30px}.project-crookes-green .crookes-reference:first-child{width:min(100%,280px);justify-self:center}}
+
+/* Two Crookes Green recordings retain their original horizontal and portrait formats. */
+.work-recordings .recording-title{display:flex;align-items:baseline;justify-content:space-between;gap:8px 16px;font:400 var(--type-project-title)/1.35 var(--work-title-face);color:var(--lime);margin:0 0 12px}.work-recordings .recording-title span{font:400 var(--type-small)/1.5 var(--project-font);color:#aaa;white-space:nowrap}.work-recordings .work-version-card{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:start;gap:20px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}.work-recordings .score-cover-link{display:block;position:relative;width:100%;aspect-ratio:3/4;background:#fff}.work-recordings .score-cover-link img{display:block;width:100%;height:100%;object-fit:contain}.work-recordings .score-cover-link .film-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;background:rgba(0,0,0,.78);color:#fff}.work-recordings .work-version-card p{font-size:var(--type-meta);line-height:1.6;color:#bbb}.work-recordings .recording-youtube-link{display:inline-block;font-size:var(--type-small);line-height:1.5;margin-top:10px;text-decoration:underline;text-underline-offset:4px}.work-recordings .score-cover-link:hover .film-play{color:var(--lime)}.work-recordings [data-film-id]:focus-visible{outline:2px solid var(--lime);outline-offset:4px}.work-recordings .film-frame{min-height:0}
+.work-film-viewer{width:min(94vw,620px);max-height:94dvh;padding:16px;border:1px solid #444;background:#111;color:#eee}.work-film-viewer::backdrop{background:rgba(0,0,0,.9)}.work-film-viewer .media-viewer-toolbar{margin-bottom:14px}.portrait-film-frame{width:min(100%,calc((100dvh - 150px)*.75));aspect-ratio:3/4;margin-inline:auto;background:#000}.portrait-film-frame iframe{display:block;width:100%;height:100%;border:0}@media(max-width:650px){.work-recordings .work-version-card{grid-template-columns:78px minmax(0,1fr);gap:14px}.work-recordings .recording-title{flex-wrap:wrap;gap:4px 10px}.work-film-viewer{padding:12px}}
+
+/* The piano/accordion work keeps the warm maple tone of its performance photograph. */
+body[data-project="prelude-jazz-fugue"]{--lime:#d5b58d;--accent:#d5b58d;--work-title-face:Baskerville,Georgia,serif;--work-title-size:clamp(35px,4.6vw,66px);--work-title-case:none;--work-title-track:-.025em}
+.project-prelude-jazz-fugue .work-heading h1{display:flex;flex-wrap:wrap;align-items:baseline;line-height:1.08}
+.project-prelude-jazz-fugue .work-chinese-title{margin-top:0;font-family:'Songti SC',serif;font-weight:400;font-size:clamp(19px,2.1vw,28px);letter-spacing:.025em;white-space:nowrap}
+.project-prelude-jazz-fugue .work-layout{grid-template-areas:"heading heading" "film film" "story story";grid-template-rows:auto auto auto}
+.project-prelude-jazz-fugue .work-still>a{aspect-ratio:16/9}
+.project-prelude-jazz-fugue .project-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.project-prelude-jazz-fugue .project-document-image:has(img[src*="score-"])>a{aspect-ratio:595/842;background:#fff}
+.project-prelude-jazz-fugue .project-document-image:has(img[src*="score-"]) img{object-fit:contain}
+.project-prelude-jazz-fugue .project-document-image:last-child{grid-column:1/-1}
+.project-prelude-jazz-fugue .project-depth>.work-document-section{margin-top:0}
+@media(max-width:850px){.project-prelude-jazz-fugue .work-layout{grid-template-areas:"heading" "film" "story";grid-template-rows:auto}}
+@media(max-width:650px){.project-prelude-jazz-fugue .project-doc-grid{grid-template-columns:1fr;gap:24px}.project-prelude-jazz-fugue .translation-toolbar{margin:0 0 18px}}
+
+/* Glass Factory pairs its approved white title frame with quiet, source-led reading. */
+body[data-project="glass-factory"]{--lime:#e6e6e2;--accent:#e6e6e2;--work-title-face:Baskerville,Georgia,serif;--work-title-size:clamp(44px,6vw,78px);--work-title-case:none;--work-title-track:-.025em}
+.project-glass-factory .work-heading h1{display:flex;flex-wrap:wrap;align-items:baseline;line-height:1.08}
+.project-glass-factory .work-chinese-title{margin-top:0;font-family:'Songti SC',serif;font-size:clamp(20px,2.1vw,28px);font-weight:400;letter-spacing:.025em;white-space:nowrap}
+.project-glass-factory .work-layout{grid-template-areas:"heading heading" "film credits" "poem poem" "story story";grid-template-rows:auto auto auto auto}
+.project-glass-factory .film-frame{min-height:0;background:#fff}
+.project-glass-factory .film-link::after{display:none}
+.project-glass-factory .film-action{color:#111;background:rgba(255,255,255,.94);padding:5px 10px 5px 0;font-size:15px}
+.project-glass-factory .film-link:hover .film-action{color:#111;text-decoration:underline;text-underline-offset:4px}
+.project-glass-factory .translation-toolbar{margin:0 0 20px}
+.project-glass-factory .work-story .translation-toolbar{margin:-42px 0 22px}
+.project-glass-factory .work-document-section{margin-top:0;padding:30px 0 36px;border-top:1px solid var(--line)}
+.project-glass-factory .work-document-section>h2{font-size:var(--type-project-title);line-height:1.4;margin-bottom:22px}
+.project-glass-factory .glass-background-context{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:start}
+.project-glass-factory .glass-background-context:has(.translation-open){grid-template-columns:1fr}
+.project-glass-factory .glass-background-context .translation-english{max-width:none;margin:0}
+.project-glass-factory .glass-context-image{max-width:540px}
+.project-glass-factory .glass-context-image img,.project-glass-factory .glass-poet-portrait img{display:block;width:100%;height:auto}
+.project-glass-factory :is(.glass-context-image,.glass-poet-portrait) figcaption{font:12px/1.6 var(--project-font);color:#a8a8a8;margin-top:12px}
+.project-glass-factory :is(.glass-context-image,.glass-poet-portrait) figcaption p+p{margin-top:5px}
+.project-glass-factory :is(.glass-context-image,.glass-poet-portrait) figcaption a,.project-glass-factory .context-source{text-decoration:underline;text-underline-offset:3px}
+.project-glass-factory .context-source{font-size:12px;white-space:nowrap;color:#aaa}
+.project-glass-factory .glass-poem-credit{font:14px/1.6 var(--project-font);color:#bbb;margin-bottom:22px}
+.project-glass-factory .glass-poem-credit cite{font-style:italic}
+.project-glass-factory .glass-poem .bilingual-reading p{white-space:pre-line;line-height:1.75;overflow-wrap:normal}
+.project-glass-factory .glass-poem .translation-english{max-width:58ch}
+.project-glass-factory .glass-poem .translation-open .translation-english{max-width:none}
+.project-glass-factory .glass-poet-context{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;align-items:start}
+.project-glass-factory .glass-poet-biography h3,.project-glass-factory .glass-translator-context h3{font-size:22px;line-height:1.4;margin-bottom:16px}
+.project-glass-factory .glass-poet-biography .translation-english{max-width:none;margin:0}
+.project-glass-factory .glass-translator-context{border-top:1px solid var(--line);margin-top:34px;padding-top:26px}
+.project-glass-factory .glass-translator-context .translation-english{max-width:78ch;margin:0}
+.art[href="projects/glass-factory.html"] img{object-fit:contain;background:#fff}
+@media(max-width:850px){.project-glass-factory .work-layout{grid-template-areas:"heading" "film" "poem" "story" "credits";grid-template-rows:auto}.project-glass-factory .glass-background-context{grid-template-columns:1fr;gap:24px}.project-glass-factory .glass-context-image{max-width:620px}.project-glass-factory .glass-poet-context{grid-template-columns:180px minmax(0,1fr);gap:28px}}
+@media(max-width:650px){.project-glass-factory .work-story .translation-toolbar{margin:0 0 18px}.project-glass-factory .glass-poet-context{grid-template-columns:1fr;gap:26px}.project-glass-factory .glass-poet-portrait{max-width:220px}.project-glass-factory .glass-poem .bilingual-reading{font-size:18px}.project-glass-factory .context-source{white-space:normal}.project-glass-factory .glass-poem-credit{font-size:13px}.project-glass-factory .film-action{font-size:13px;bottom:10px;left:10px}.project-glass-factory .film-play{width:30px;height:30px}}
+
+/* Glass Factory: the original poem and translation share equal, permanent visibility. */
+.project-glass-factory .glass-poem{grid-area:poem;min-width:0;margin-top:4px}
+.project-glass-factory .glass-people-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.project-glass-factory .glass-poem-columns{display:grid;grid-template-columns:1fr;gap:34px}
+.project-glass-factory .glass-poem-language-lines{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.project-glass-factory .glass-poem-language-lines>p{min-width:0}
+.project-glass-factory .glass-poem-columns>div{min-width:0}
+.project-glass-factory .glass-poem-columns h3{font:400 18px/1.4 var(--project-font);margin:0 0 10px}
+.project-glass-factory .glass-poem-credit{min-height:0;margin-bottom:18px}
+.project-glass-factory .glass-poem-lines{font:400 14px/1.8 var(--project-font);white-space:pre-line;overflow-wrap:normal;margin:0}
+.project-glass-factory .glass-person-card{min-width:0;border-top:0;margin-top:0;padding-top:0}
+.project-glass-factory .glass-person-card .glass-poet-portrait{margin:0 0 26px;max-width:none}
+.project-glass-factory .glass-person-card .glass-poet-portrait img{width:100%;height:300px;object-fit:contain;object-position:left center}
+.project-glass-factory .glass-person-card .glass-poet-portrait figcaption{min-height:100px}
+.project-glass-factory .glass-person-card h3{font-size:22px;line-height:1.4;margin:0 0 16px}
+.project-glass-factory .glass-person-card .translation-english{max-width:none;margin:0}
+.project-glass-factory .glass-person-card .translation-open .bilingual-reading{display:block}
+.project-glass-factory .glass-person-card .translation-open .original-copy{border-top:1px solid var(--line);padding-top:22px;margin-top:24px}
+@media(max-width:850px){.project-glass-factory .glass-poem-columns,.project-glass-factory .glass-people-grid{grid-template-columns:1fr;gap:32px}.project-glass-factory .glass-poem-columns>div+div{border-top:1px solid var(--line);padding-top:28px}.project-glass-factory .glass-poem-credit{min-height:0}.project-glass-factory .glass-person-card .glass-poet-portrait figcaption{min-height:0}.project-glass-factory .glass-person-card+.glass-person-card{border-top:1px solid var(--line);padding-top:30px}.project-glass-factory .glass-person-card .glass-poet-portrait img{height:280px}}
+@media(max-width:650px){.project-glass-factory .glass-poem-lines{font-size:16px}.project-glass-factory .glass-poem-columns h3{font-size:18px}}
+
+/* Keep the historical context just two pixels above the poem text. */
+.project-glass-factory .glass-background-context .bilingual-reading p{font-size:16px;line-height:1.75}
+.project-glass-factory .glass-background-context .context-source{font-size:12px}
+@media(max-width:650px){.project-glass-factory .glass-background-context .bilingual-reading p{font-size:18px}}
+
+/* Show the former factory with less foreground; lightbox retains the full source. */
+.project-glass-factory .glass-context-image>a{display:block;aspect-ratio:16/9;overflow:hidden}
+.project-glass-factory .glass-context-image img{width:100%;height:100%;object-fit:cover;object-position:50% 0%}
+
+@media(max-width:850px){.project-glass-factory .glass-poem-language-lines{grid-template-columns:1fr;gap:0}.project-glass-factory .glass-poem-language-lines>p+p{margin-top:0}}
+
+/* Four equal poem columns on wide screens; each language heading spans its pair. */
+@media(min-width:1101px){.project-glass-factory .glass-poem-columns{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}.project-glass-factory .glass-poem-credit{min-height:45px}.project-glass-factory .glass-poem-language-lines{gap:40px}}
+.art[href="projects/prelude-jazz-fugue.html"] img{object-fit:contain}
+
+/* Yell uses the approved film's black and red palette. */
+body[data-project="yell"]{--lime:#d2322b;--accent:#d2322b;--work-title-face:Baskerville,Georgia,serif;--work-title-size:clamp(60px,8vw,104px);--work-title-case:none;--work-title-track:-.025em}
+.project-yell .work-layout{grid-template-areas:"heading heading" "film credits" "story story";grid-template-rows:auto auto auto}
+.project-yell .project-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.project-yell .film-frame{background:#000;min-height:0}
+.project-yell .film-link::after{display:none}
+.project-yell .film-action{color:#f1eded;background:rgba(0,0,0,.9);padding:5px 10px 5px 0;font-size:15px}
+.project-yell .work-story .translation-toolbar{margin:-42px 0 22px}
+.art[href="projects/yell.html"] img{object-fit:contain;background:#000}
+@media(max-width:850px){.project-yell .work-layout{grid-template-areas:"heading" "film" "story" "credits";grid-template-rows:auto}}
+@media(max-width:650px){.project-yell .project-doc-grid{grid-template-columns:1fr;gap:22px}.project-yell .work-story .translation-toolbar{margin:0 0 18px}.project-yell .film-action{font-size:13px}}
+
+/* Vacuum carries the monochrome palette of the artist's audiovisual work. */
+body[data-project="vacuum"]{--lime:#e5e5e2;--accent:#e5e5e2;--work-title-face:Baskerville,Georgia,serif;--work-title-size:clamp(60px,8vw,104px);--work-title-case:none;--work-title-track:-.025em}
+.project-vacuum .work-layout{grid-template-areas:"heading heading" "film credits" "story story";grid-template-rows:auto auto auto}
+.project-vacuum .work-chinese-title{font-family:'Songti SC',serif;font-weight:400;white-space:nowrap}
+.project-vacuum .project-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.project-vacuum .film-frame{min-height:0;background:#000}
+.project-vacuum .film-link::after{display:none}
+.project-vacuum .film-action{color:#eee;background:rgba(0,0,0,.85);padding:5px 10px 5px 0}
+.art[href="projects/vacuum.html"] img{object-fit:contain;background:#000}
+@media(max-width:850px){.project-vacuum .work-layout{grid-template-areas:"heading" "film" "story" "credits";grid-template-rows:auto}}
+@media(max-width:650px){.project-vacuum .project-doc-grid{grid-template-columns:1fr;gap:22px}}
+
+/* Binary follows the monochrome modular graphics of its approved cover. */
+body[data-project="binary"]{--lime:#e5e5e5;--accent:#e5e5e5;--work-title-face:'Andale Mono','Courier New',monospace;--work-title-size:clamp(48px,6.5vw,86px);--work-title-case:none;--work-title-track:-.04em}
+.project-binary .work-layout{grid-template-areas:"heading heading" "film credits" "story story";grid-template-rows:auto auto auto}
+.project-binary .work-chinese-title{font-family:'Songti SC',serif;font-weight:400;white-space:nowrap}
+.project-binary .project-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.project-binary .film-frame{min-height:0;background:#000}
+.project-binary .film-link::after{display:none}
+.project-binary .film-action{color:#eee;background:rgba(0,0,0,.85);padding:5px 10px 5px 0}
+.art[href="projects/binary.html"] img{object-fit:contain;background:#000}
+@media(max-width:850px){.project-binary .work-layout{grid-template-areas:"heading" "film" "story" "credits";grid-template-rows:auto}}
+@media(max-width:650px){.project-binary .project-doc-grid{grid-template-columns:1fr;gap:22px}}
+
+/* Reference images sit with the programme note; the work's own film stills follow it. */
+.work-story:has(.programme-illustrated){position:relative}
+.programme-illustrated{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr);gap:36px;align-items:start}
+.programme-illustrated>.translation-block{min-width:0}
+.programme-illustrated .translation-toolbar{position:absolute;top:25px;right:0;margin:0}
+.programme-illustrated .translation-english{max-width:none;margin:0}
+.programme-reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;min-width:0}
+.programme-reference{min-width:0;margin:0}
+.programme-reference>a{display:block;background:#080808;line-height:0}
+.programme-reference img{display:block;width:100%;height:auto;max-height:270px;object-fit:contain}
+.programme-reference figcaption{margin-top:10px;font:14px/1.55 var(--project-font);color:#bbb}
+.work-story .programme-reference h3{font:400 17px/1.4 var(--work-title-face,var(--project-font));color:var(--lime);margin:0 0 4px}
+.programme-reference-source{display:inline-block;font-size:14px;margin-top:5px;text-decoration:underline;text-underline-offset:4px;color:#aaa}
+.reference-book{display:grid;grid-column:1/-1;grid-template-columns:90px minmax(0,1fr);gap:16px;align-items:center}
+.reference-book img{max-height:140px}
+.reference-book figcaption{margin:0}
+.programme-illustrated:has(.translation-open){grid-template-columns:1fr;gap:28px}.programme-illustrated:has(.translation-open) .reference-book{grid-column:auto}
+.programme-illustrated:has(.translation-open) .programme-reference-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px}
+@media(max-width:850px){.programme-illustrated{grid-template-columns:1fr;gap:28px}.programme-reference-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.reference-book{grid-template-columns:80px minmax(0,1fr)}}
+@media(max-width:650px){.programme-illustrated .translation-toolbar{position:static;margin:0 0 18px}.programme-reference-grid,.programme-illustrated:has(.translation-open) .programme-reference-grid{grid-template-columns:1fr;gap:26px}.programme-reference img{max-height:none}.reference-book{grid-template-columns:90px minmax(0,1fr)}.reference-book img{max-height:140px}}
+
+/* Work sorting shares the category controls in both Images and List views. */
+.work-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0 26px}
+.work-controls .work-filters{flex:1 1 auto}
+.work-sort{display:flex;align-items:center;gap:10px;max-width:100%;margin:18px 0 20px;color:#aaa;font:14px/1.5 var(--project-font)}
+.work-sort select{appearance:none;min-width:0;max-width:100%;border:1px solid #666;border-radius:0;background-color:#111;color:#eee;padding:7px 32px 7px 10px;font:14px/1.4 var(--project-font);cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%23ccc' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center}
+.work-sort select:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+@media(max-width:650px){.work-controls{display:block}.work-controls .work-filters{margin-bottom:14px}.work-sort{margin:0 0 20px;gap:8px}}
+
+/* Ongoing works stay together after the completed portfolio. */
+.work-progress-group{margin-top:46px;padding-top:28px;border-top:1px solid var(--line)}
+.work-progress-group>h3{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px 18px;margin:0 0 24px;font:500 28px/1.3 var(--project-font);color:var(--lime)}
+.work-progress-group>h3 span{font:400 17px/1.5 'PingFang SC',sans-serif;color:#bbb}
+.work-status-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:28px 0 0;padding:20px 22px;border:1px solid var(--line);background:#1a1a1a;color:var(--lime)}
+.detail .work-status-bar h2{font:400 22px/1.4 var(--work-title-face,var(--project-font));margin:0}
+.work-status-bar>span{font:400 16px/1.6 'PingFang SC',sans-serif;color:#bbb}
+.project-tide .work-layout{grid-template-areas:"heading heading" "film credits" "story story";grid-template-rows:auto auto auto}
+.project-tide .work-still{width:min(100%,480px);justify-self:center}
+.project-tide .work-still>a{aspect-ratio:auto;background:#fff}
+.project-tide .work-still img{width:100%;height:auto;object-fit:contain}
+.project-tide .tidal-spatial .translation-toolbar{margin:0 0 20px}
+.tidal-concept{padding:16px 0;border-bottom:1px solid var(--line)}
+.tidal-concept summary{position:relative;list-style:none;padding-right:32px;font:400 19px/1.5 var(--work-title-face);color:var(--lime);cursor:pointer}
+.tidal-concept summary::-webkit-details-marker{display:none}
+.tidal-concept summary::after{content:'+';position:absolute;right:0;top:0;color:#aaa}
+.tidal-concept[open] summary::after{content:'−'}
+.tidal-concept .translation-toolbar{margin:18px 0}
+.tidal-performance{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:36px;align-items:start}
+.tidal-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.tidal-examples .project-document-image>a{display:block;aspect-ratio:auto;overflow:visible;background:#fff;line-height:0}
+.tidal-examples img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+.tidal-examples figcaption{margin-top:8px;font:14px/1.6 var(--project-font);color:#bbb}
+.tidal-examples .project-document-image:last-child{grid-column:1/-1;display:grid;grid-template-columns:90px minmax(0,1fr);gap:15px;align-items:center}
+.tidal-examples .project-document-image:last-child img{max-height:100px}
+@media(max-width:850px){.project-tide .work-layout{grid-template-areas:"heading" "film" "story" "credits";grid-template-rows:auto}.tidal-performance{grid-template-columns:1fr;gap:24px}}
+@media(max-width:650px){.work-status-bar{padding:16px;gap:12px}.detail .work-status-bar h2{font-size:20px}.work-status-bar>span{font-size:14px}.work-progress-group>h3{font-size:25px}.tidal-examples{gap:20px}.project-tide .work-story .translation-toolbar{margin:0 0 18px}}
+
+/* Full source pages remain legible and open at their original proportions. */
+.project-tide .project-doc-grid.media-count-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.project-tide .project-doc-grid .project-document-image>a{display:block;aspect-ratio:auto;overflow:visible;background:#fff}
+.project-tide .project-doc-grid .project-document-image img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+.project-tide .project-doc-grid figcaption{font:14px/1.6 var(--project-font);margin-top:8px;color:#bbb}
+@media(max-width:650px){.project-tide .project-doc-grid.media-count-2{grid-template-columns:1fr}}
+
+/* Portrait cover and the original diagram each keep their own proportions. */
+.project[data-title="Tidal Bearings"] .art{aspect-ratio:3/2;background:#202020}
+.project[data-title="Tidal Bearings"] .art img{object-fit:contain}
+.project-tide .tidal-spatial>.project-document-image{margin-top:24px}
+.project-tide .tidal-spatial>.project-document-image>a{aspect-ratio:auto;background:#fff}
+.project-tide .tidal-spatial>.project-document-image img{width:100%;height:auto;object-fit:contain}
+.project-tide .project-doc-grid.media-count-1{grid-template-columns:minmax(0,1fr);max-width:560px}
+/* The English notes flow down the left column, then down the right on desktop. */
+@media(min-width:851px){
+ .tidal-thinking .translation-block:not(.translation-open) .translation-english{max-width:none;margin:0;column-count:2;column-gap:40px;column-fill:balance;orphans:3;widows:3}
+ .tidal-thinking .translation-block.translation-open .translation-english{column-count:1}
+}
+
+/* Tide's instrumentation, author and credits form one block beside the cover. */
+.project-tide .work-heading{grid-template-areas:"title title" "date date"}
+.tidal-summary{grid-area:credits;min-width:0;align-self:start}
+.tidal-summary .work-identity{grid-area:auto}
+.tidal-summary .work-credits{margin-top:22px;padding-top:18px}
+@media(max-width:850px){
+ .project-tide .work-heading{grid-template-areas:"title" "date"}
+ .project-tide .work-layout{grid-template-areas:"heading" "film" "credits" "story"}
+}
+
+/* Cover and programme note sit together as two complete portrait pages. */
+.tidal-score-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.tidal-score-pair .project-document-image>a{display:block;aspect-ratio:auto;overflow:visible;background:#fff;line-height:0}
+.tidal-score-pair .project-document-image img{display:block;width:100%;height:auto;object-fit:contain}
+.tidal-score-pair figcaption{font:12px/1.5 var(--project-font);color:#aaa;margin-top:10px}
+.project-tide .tidal-spatial>.project-document-image{width:min(100%,760px);margin:24px auto 0}
+@media(max-width:850px){
+ .tidal-score-pair{grid-template-columns:minmax(0,1fr);max-width:480px;justify-self:center;width:100%;gap:24px}
+}
+
+/* A landscape spread keeps the score cover aligned with the other work cards. */
+.tide-cover-spread{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;width:100%;height:100%;padding:6px;align-items:center}
+.project .art .tide-cover-spread img{display:block;width:100%;height:100%;min-height:0;object-fit:contain;transform:none}
+
+/* The complete biography has its own reading page, leaving Work close to Home. */
+.about .cv-note a{display:inline-block;font-size:16px;line-height:1.6}
+.about .cv-note span{font-family:'PingFang SC',sans-serif;margin-left:10px;font-size:14px}
+.biography-page{max-width:1240px;margin:0 auto;padding:28px 28px 0;font-family:var(--project-font)}
+.biography-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:28px 0 30px;border-bottom:1px solid var(--line)}
+.biography-heading h1{font:var(--display-weight) clamp(52px,7vw,94px)/.95 var(--font-display);letter-spacing:-.035em;color:var(--lime)}
+.biography-heading p{margin-top:20px;font-size:24px;line-height:1.4}
+.biography-heading .chinese-name{font-size:.85em;margin-left:14px}
+.biography-languages{display:flex;gap:18px;align-items:baseline;flex-shrink:0}
+.biography-languages button{border:0;border-bottom:1px solid transparent;padding:5px 0;background:transparent;color:#aaa;font:16px/1.5 var(--project-font);cursor:pointer}
+.biography-languages button[aria-pressed=true]{border-color:var(--lime);color:var(--lime)}
+.biography-languages button:focus-visible{outline:2px solid var(--lime);outline-offset:5px}
+.biography-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:48px;padding-top:32px;align-items:start}
+.biography-index{position:sticky;top:28px;min-width:0}
+.biography-index nav{display:flex;flex-direction:column;gap:12px}
+.biography-index nav a{font-size:14px;line-height:1.5;color:#bbb}
+.biography-index nav a:hover{color:var(--lime)}
+.biography-email{display:block;margin-top:32px;color:var(--lime);font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.biography-copy{max-width:76ch;font-size:16px;line-height:1.65;font-weight:400;overflow-wrap:break-word}
+.biography-copy[lang=zh-CN]{font-family:'PingFang SC','Noto Sans CJK SC',sans-serif;font-size:16px;line-height:1.8}
+.biography-copy[hidden]{display:none}
+.biography-section{scroll-margin-top:28px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.biography-section h2{font:400 19px/1.4 var(--project-font);color:var(--lime);margin-bottom:14px}
+.biography-copy[lang=zh-CN] h2{font-family:inherit;font-size:19px}
+.biography-section p+p{margin-top:1em}
+.biography-section:last-child{border-bottom:0;margin-bottom:0}
+.biography-work-link{border-top:1px solid var(--line);padding:24px 0 32px}
+.biography-work-link a{color:var(--lime);font-size:18px;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:850px){.biography-layout{grid-template-columns:minmax(0,1fr);gap:22px}.biography-index{position:static}.biography-index nav{flex-direction:row;flex-wrap:wrap;gap:10px 22px}.biography-email{margin-top:16px}.biography-copy{max-width:76ch}}
+@media(max-width:650px){.biography-page{padding:24px 16px 0}.biography-heading{align-items:flex-start;flex-direction:column;padding:24px 0;gap:20px}.biography-heading p{font-size:22px;margin-top:16px}.biography-copy,.biography-copy[lang=zh-CN]{font-size:16px}.biography-section h2{font-size:19px}.biography-section{margin-bottom:24px;padding-bottom:24px}.biography-index nav a{font-size:14px}.biography-email{font-size:14px}}
+
+/* Desktop biography reads down the left column, then down the right. */
+@media(min-width:851px){
+ .biography-layout{grid-template-columns:200px minmax(0,1fr);gap:40px}
+ .biography-layout>div{min-width:0}
+ .biography-copy{max-width:none}
+ .biography-section-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+}
+
+/* The short closing practice statement stays intact as one paragraph. */
+.biography-section[id^="practice-"]{max-width:76ch}
+
+/* Chinese biography samples: independent heading and body faces, smaller type. */
+.biography-page .biography-copy[lang=zh-CN]{font-family:var(--bio-cn-body,'PingFang SC'),serif;font-size:15px;font-weight:var(--bio-cn-weight,300);line-height:1.85}
+.biography-page .biography-copy[lang=zh-CN] h2{font-family:var(--bio-cn-heading,'Lantinghei SC'),sans-serif;font-size:18px;font-weight:400}
+.biography-languages button[lang=zh-CN]{font-family:var(--bio-cn-heading,'Lantinghei SC'),sans-serif;font-size:14px;font-weight:400}
+.biography-index nav a[lang=zh-CN]{font-family:var(--bio-cn-heading,'Lantinghei SC'),sans-serif;font-size:14px;font-weight:400}
+.biography-language-tools{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.biography-font-preview-link{font:13px/1.5 'PingFang SC',sans-serif;color:#aaa;text-decoration:underline;text-underline-offset:4px}
+.bio-type-studio{padding:28px;max-width:1600px;margin:auto;font-family:'PingFang SC',sans-serif}
+.bio-type-heading{margin:28px 0 32px}.bio-type-heading h1{font-size:32px;font-weight:400;color:var(--lime)}
+.bio-type-heading p{font-size:15px;line-height:1.8;color:#bbb;margin-top:14px;max-width:70ch}
+.bio-type-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.bio-type-card{min-width:0;border:1px solid #444;padding:20px}
+.bio-type-card>header{display:flex;align-items:start;justify-content:space-between;gap:12px;padding-bottom:16px;border-bottom:1px solid #333;margin-bottom:18px}
+.bio-type-card>header p{font:14px/1.6 'PingFang SC',sans-serif;color:#bbb}
+.bio-type-card button{border:1px solid #666;background:transparent;color:var(--lime);font:13px/1.5 'PingFang SC',sans-serif;padding:5px 8px;white-space:nowrap}
+.bio-type-sample{font-family:var(--bio-cn-body),serif;font-weight:var(--bio-cn-weight);font-size:15px;line-height:1.85}
+.bio-type-sample h2{font:400 18px/1.5 var(--bio-cn-heading),sans-serif;color:var(--lime);margin:22px 0 14px}
+.bio-type-language{font:400 14px/1.5 var(--bio-cn-heading),sans-serif;color:var(--lime);text-align:right}
+@media(max-width:1100px){.bio-type-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.bio-type-studio{padding:24px 16px}.bio-type-grid{grid-template-columns:1fr}.biography-language-tools{align-items:flex-start}}
+
+/* Wrong Passenger uses the installation's vivid laser green. */
+.project-wrong-passenger .wrong-story-grid .project-document-image>a{aspect-ratio:auto;background:transparent}
+.project-wrong-passenger .wrong-story-grid .project-document-image img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain}
+/* Laser-head rendering on the left; complete portrait model on the right. */
+.wrong-spatial-pair{display:grid;grid-template-columns:minmax(0,2.85fr) minmax(0,1fr);gap:24px;max-width:980px;margin-inline:auto;align-items:start}
+.wrong-spatial-pair .project-document-image>a,.wrong-shared-space .project-document-image>a{aspect-ratio:auto;background:transparent}
+.wrong-spatial-pair .project-document-image img,.wrong-shared-space img{display:block;width:100%;height:auto;object-fit:contain}
+.wrong-shared-space{width:min(100%,760px);margin:32px auto 0}
+@media(max-width:500px){.wrong-spatial-pair{grid-template-columns:1fr;gap:24px}.wrong-spatial-pair .project-document-image:last-child{width:min(60%,280px);justify-self:center}}
+.project:hover h3,.project:focus-within h3{color:var(--project-accent,var(--lime))}
+
+/* Keep all title-frame text visible within the homepage card. */
+.project[data-title="Wrong Passenger"] .art img{object-fit:contain}
+
+/* Letterbox space belongs to the page, without a separate cover frame. */
+.project .art,.project[data-title="Tidal Bearings"] .art{background:transparent;border:0}
+/* Chinese type follows the site's poster identity, with a quiet reading face. */
+.biography-page .biography-copy[lang=zh-CN] h2{font-weight:var(--bio-cn-heading-weight,700);letter-spacing:-.025em}
+.biography-languages button[lang=zh-CN]{font-family:var(--bio-cn-body,'PingFang SC'),sans-serif;font-weight:400}
+.bio-type-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.bio-type-card{padding:0;border:0}
+.bio-type-card>header{padding:0 0 18px;margin:0}
+.bio-type-card>header .bio-type-note{font-size:13px;color:#888;margin-top:5px;line-height:1.6}
+.bio-type-context{background:var(--lime);color:#111;padding:16px 20px 20px;overflow:hidden}
+.bio-type-context>span{font:400 15px/1 var(--font-display)}
+.bio-type-context strong{display:block;margin-top:12px;font:400 clamp(46px,5.5vw,78px)/.9 var(--font-display);letter-spacing:-.025em}
+.bio-type-context p{font:var(--bio-cn-poster-weight) 23px/1.3 var(--bio-cn-poster),sans-serif;margin-top:16px;letter-spacing:-.025em}
+.bio-type-sample{padding:20px 20px 26px;border:1px solid #333;border-top:0}
+.bio-type-sample h3{font:400 42px/1 var(--font-display);color:var(--lime);margin:22px 0}
+.bio-type-sample h2{font-weight:var(--bio-cn-heading-weight);letter-spacing:-.025em}
+.bio-type-language{font:400 14px/1.5 var(--bio-cn-body),sans-serif}
+.bio-type-language span{color:#aaa;margin-right:14px;font-family:var(--project-font)}
+@media(max-width:750px){.bio-type-grid{grid-template-columns:1fr}.bio-type-context strong{font-size:64px}}
+
+
+/* Artist-selected Chinese roles, 2026-11-23: poster / green heading / white copy. */
+:root{--bio-cn-poster:'DanniBio-Smiley';--bio-cn-poster-weight:400;--bio-cn-heading:'DanniBio-Noto';--bio-cn-heading-weight:900;--bio-cn-body:'DanniBio-NeoXiHei';--bio-cn-weight:400;--font-chinese-body:'DanniBio-NeoXiHei','DanniBio-Noto','PingFang SC',sans-serif}
+.poster [lang="zh-CN"]{font-family:var(--bio-cn-poster),sans-serif;font-weight:var(--bio-cn-poster-weight)}
+
+/* Compare body faces independently; keep the confirmed Chinese display roles. */
+.keep-separator,.keep-phrase{white-space:nowrap}
+.biography-preview-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 16px}
+.biography-page .biography-copy[lang=zh-CN]{font-family:var(--bio-cn-body),'DanniBio-Noto',sans-serif}
+.bio-body-studio{max-width:1500px;margin:auto;padding:28px;font-family:var(--project-font)}
+.bio-body-heading{margin:28px 0 36px;max-width:760px}
+.bio-body-heading>span{display:block;font:400 60px/.95 var(--font-display);color:var(--lime);margin-bottom:22px}
+.bio-body-heading h1{font:500 25px/1.4 'PingFang SC',sans-serif;margin-bottom:14px}
+.bio-body-heading>p{font:400 15px/1.8 'PingFang SC',sans-serif;color:#bbb}
+.bio-body-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:start}
+.bio-body-card{min-width:0;border-top:1px solid #555;padding-top:18px}
+.bio-body-card>header{display:flex;justify-content:space-between;align-items:start;gap:12px;margin-bottom:28px}
+.bio-body-card>header h2{font:500 16px/1.5 'PingFang SC',sans-serif}
+.bio-body-card>header p{font:400 13px/1.6 'PingFang SC',sans-serif;color:#999;margin-top:5px}
+.bio-body-card>header button{flex:none;border:1px solid #666;background:transparent;color:var(--lime);font:400 13px/1.5 'PingFang SC',sans-serif;padding:6px 10px}
+.bio-body-sample{font:var(--bio-cn-weight) 15px/1.85 var(--bio-cn-body),'DanniBio-Noto',sans-serif}
+.bio-body-sample h3{font:900 18px/1.4 'DanniBio-Noto',sans-serif;color:var(--lime);margin:24px 0 14px;letter-spacing:-.025em}
+.bio-body-sample h3:first-child{margin-top:0}
+.bio-body-font-notice{margin-top:35px;font:400 12px/1.6 'PingFang SC',sans-serif;color:#888}
+.bio-body-font-notice a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:800px){.bio-body-grid{grid-template-columns:1fr;gap:36px}.bio-body-studio{padding:24px 16px}.biography-preview-links{justify-content:flex-start}}
+
+/* Final Chinese body choice, artist confirmation 2026-11-23. */
+main :is(p,li,dd,td,th,figcaption):lang(zh-CN){font-family:var(--font-chinese-body);font-weight:400}
+/* Audition samples retain their own local body face. */
+.bio-body-sample :is(p,li),.bio-type-sample :is(p,li){font-family:var(--bio-cn-body),'DanniBio-Noto',sans-serif;font-weight:var(--bio-cn-weight)}
+.biography-page .biography-copy[lang=zh-CN] p{font-family:inherit;font-weight:inherit}
+
+/* Keep complete paragraphs in one column; phones read the same groups in order. */
+.biography-text-column{min-width:0}
+.biography-section-columns.is-single{grid-template-columns:minmax(0,1fr);max-width:76ch}
+.biography-text-column p{break-inside:avoid;line-break:strict;word-break:normal;overflow-wrap:normal}
+@media(max-width:850px){.biography-section-columns{display:grid;grid-template-columns:minmax(0,1fr);gap:1em}}

@@ -1,0 +1,55 @@
+/* Confirmed 2026-11-23. One reading system for every work and research page.
+   Main artwork titles and artwork-specific accent colours remain independent.
+   Canonical values are documented in 个人网站和作品集视频规范.md, section 19. */
+body[data-project] .detail[class*="project-"]{
+ --work-reading-font:'Gill Sans','DanniProject-inter','PingFang SC',sans-serif;
+ --project-font:var(--work-reading-font);
+ --type-copy:15px;
+ --type-project-title:18px;
+ --type-subheading:16px;
+ --type-meta:14px;
+ --type-small:14px;
+ font:400 var(--type-copy)/1.7 var(--work-reading-font);
+}
+body[data-project] .detail[class*="project-"] :is(p,.work-prose,.bilingual-reading,.work-introduction,.original-copy,.translation-english,.work-artist-statement){
+ font-family:var(--work-reading-font);font-size:var(--type-copy);font-weight:400;font-style:normal;line-height:1.7;letter-spacing:0;
+}
+body[data-project] .detail[class*="project-"] :is(h2,h3,summary){
+ font-family:var(--work-reading-font);font-weight:500;font-style:normal;line-height:1.4;letter-spacing:0;text-transform:none;
+}
+body[data-project] .detail[class*="project-"] h2{font-size:var(--type-project-title)}
+body[data-project] .detail[class*="project-"] :is(h3,.tidal-concept>summary){font-size:var(--type-subheading)}
+body[data-project] .detail[class*="project-"] :is(figcaption,figcaption p,figcaption a,.reference-credit,.reference-sources,.programme-reference-source,.context-source,.document-source,.table-hint,.document-note,.translation-toggle,.translation-toggle span,.work-created,.work-credits dl,.work-credits dt,.work-credits dd,.work-identity p:last-child,table,table p,table th,table td,table caption,.next span,.back,.eyebrow,.editorial-note,.art-label){
+ font-family:var(--work-reading-font);font-size:var(--type-meta);font-weight:400;font-style:normal;line-height:1.6;letter-spacing:0;
+}
+body[data-project] .detail[class*="project-"] .work-identity p:first-child{font-size:var(--type-subheading)}
+body[data-project] .detail[class*="project-"] .translation-toggle span{margin-left:7px}
+body[data-project] .detail[class*="project-"] .next a{font:500 var(--type-subheading)/1.4 var(--work-reading-font)}
+body[data-project] .detail[class*="project-"] .next>a{font-size:var(--type-meta)}
+/* White score pages and examples retain their full content inside a soft edge. */
+body[data-project] .detail :is(.light-media>a,.score-cover-link){border-radius:8px;overflow:hidden}
+body[data-project] .detail :is(.light-media img,.score-cover-link img){border-radius:8px}
+
+/* One cover/summary composition, following the approved Tidal Bearings layout. */
+.detail.work-detail .work-heading{grid-template-columns:1fr;grid-template-areas:"title" "date"}
+.detail.work-detail .work-layout{grid-template-columns:minmax(0,2fr) minmax(0,1fr);grid-template-areas:"heading heading" "film credits" "story story";grid-template-rows:auto;align-items:start}
+.detail.work-detail .work-layout:has(>.work-introduction){grid-template-areas:"heading heading" "film credits" "intro intro" "story story"}
+.detail.work-detail .work-layout:has(>.glass-poem){grid-template-areas:"heading heading" "film credits" "poem poem" "story story"}
+.detail.work-detail .work-layout:has(>.work-early-gallery){grid-template-areas:"heading heading" "film credits" "intro intro" "story story" "gallery gallery"}
+.work-summary{grid-area:credits;min-width:0;align-self:start;width:100%}
+.work-summary .work-identity{grid-area:auto}
+.work-summary .work-credits{margin-top:22px;padding-top:18px;width:100%}
+.work-summary .work-credits dl>div{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);align-items:center}
+.work-summary .work-credits :is(dt,dd){min-width:0;overflow-wrap:anywhere}
+@media(max-width:850px){
+ .detail.work-detail .work-layout{grid-template-columns:minmax(0,1fr);grid-template-areas:"heading" "film" "credits" "story"}
+ .detail.work-detail .work-layout:has(>.work-introduction){grid-template-areas:"heading" "film" "credits" "intro" "story"}
+ .detail.work-detail .work-layout:has(>.glass-poem){grid-template-areas:"heading" "film" "credits" "poem" "story"}
+ .detail.work-detail .work-layout:has(>.work-early-gallery){grid-template-areas:"heading" "film" "credits" "intro" "story" "gallery"}
+}
+
+/* Chinese prose uses the artist-selected Neo XiHei throughout the work pages. */
+body[data-project] .detail[class*="project-"] .original-copy,
+body[data-project] .detail[class*="project-"] :is(p,li,dd,td,th,figcaption):lang(zh-CN){
+ font-family:var(--font-chinese-body);font-weight:400;
+}
